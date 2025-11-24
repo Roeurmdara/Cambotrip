@@ -4,7 +4,7 @@ import Navigation from "@/components/navigation"
 
 const destinations = [
   {
-    id: "angkor-wat",
+    id: "1",
     name: "Angkor Wat",
     location: "Siem Reap",
     image: "/angkor-wat-temple-cambodia-ancient.jpg",
