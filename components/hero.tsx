@@ -14,7 +14,7 @@ export default function Hero() {
         transition={{ duration: 1.5, ease: "easeOut" }}
         className="absolute inset-0 z-0"
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-background z-10" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 rounded-xl  z-10" />
         <img src="/angkor-wat-sunrise-golden-hour-cambodia-temple.jpg" alt="Angkor Wat at sunrise" className="w-full h-full object-cover" />
       </motion.div>
 
@@ -56,21 +56,8 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 1 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20"
-      >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ repeat: Number.POSITIVE_INFINITY, duration: 2 }}
-          className="w-6 h-10 border-2 border-primary rounded-full flex items-start justify-center p-2"
-        >
-          <div className="w-1 h-2 bg-primary rounded-full" />
-        </motion.div>
-      </motion.div>
+    
+    
     </section>
   )
 }

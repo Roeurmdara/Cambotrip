@@ -1,6 +1,5 @@
 "use client"
 
-import { motion } from "framer-motion"
 import Navigation from "@/components/navigation"
 import WeatherWidget from "@/components/weather-widget"
 import CurrencyConverter from "@/components/currency-converter"
@@ -43,204 +42,134 @@ const languagePhrases = [
   { khmer: "តម្លៃប៉ុន្មាន?", phonetic: "Tlay ponman?", english: "How much?" },
 ]
 
+const safetyTips = [
+  {
+    title: "Health",
+    tip: "Drink bottled water, use mosquito repellent, and consider travel insurance. Vaccinations recommended.",
+  },
+  {
+    title: "Scams",
+    tip: "Agree on prices before services, be wary of overly friendly strangers, and keep valuables secure.",
+  },
+  {
+    title: "Traffic",
+    tip: "Roads can be chaotic. Always wear a helmet on motorbikes and be extra cautious when crossing streets.",
+  },
+  {
+    title: "Sun Protection",
+    tip: "Cambodia is hot and sunny. Use high SPF sunscreen, wear a hat, and stay hydrated throughout the day.",
+  },
+  {
+    title: "Landmines",
+    tip: "Stick to marked paths in rural areas. Some regions still have unexploded ordnance from past conflicts.",
+  },
+  {
+    title: "Valuables",
+    tip: "Use hotel safes, avoid displaying expensive items, and keep copies of important documents separately.",
+  },
+]
+
 export default function PracticalPage() {
   return (
     <>
       <Navigation />
       <main className="min-h-screen pt-16">
         {/* Hero Section */}
-        <section className="relative h-[40vh] flex items-center justify-center overflow-hidden">
-          <div className="absolute inset-0 z-0">
-            <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-background z-10" />
+        <section className="relative h-[80vh] flex items-center justify-center overflow-hidden">
+          <div className="absolute inset-0">
+            <div className="absolute inset-0z-10" />
             <img
-              src="/cambodia-travel-practical-info.jpg"
+              src="https://i.pinimg.com/1200x/1e/7f/96/1e7f96d879c6418891c51bf63dc27d7d.jpg"
               alt="Cambodia practical information"
               className="w-full h-full object-cover"
             />
           </div>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="relative z-20 text-center px-4"
-          >
-            <h1 className="font-serif text-5xl md:text-7xl font-bold text-white mb-4">Practical Information</h1>
-            <p className="text-gray-200 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
-              Everything you need to know for a smooth journey
-            </p>
-          </motion.div>
+          <div className="relative z-20 text-center px-4">
+           
+          </div>
         </section>
 
-        {/* Live Data Section */}
-        <section className="py-16 px-4 bg-background">
-          <div className="max-w-7xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-12"
-            >
-              <h2 className="font-serif text-4xl md:text-5xl font-bold text-foreground mb-4">Live Information</h2>
-              <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
-                Real-time weather and currency data
-              </p>
-            </motion.div>
+        <div className="max-w-7xl mx-auto px-4 py-12">
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Live Data Section */}
+          <div className="mb-12">
+            <div className="flex items-center gap-2 mb-6 pb-2 border-b">
+              <h2 className="text-2xl font-light">Live Information</h2>
+            </div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <WeatherWidget />
               <CurrencyConverter />
             </div>
           </div>
-        </section>
 
-        {/* Essential Information */}
-        <section className="py-16 px-4 bg-card">
-          <div className="max-w-7xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-12"
-            >
-              <h2 className="font-serif text-4xl md:text-5xl font-bold text-foreground mb-4">Essential Information</h2>
-              <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
-                Important details for your trip
-              </p>
-            </motion.div>
-
+          {/* Essential Information */}
+          <div className="mb-12">
+            <div className="flex items-center gap-2 mb-6 pb-2 border-b">
+              <h2 className="text-2xl font-light">Essential Information</h2>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {essentialInfo.map((info, index) => (
-                <motion.div
-                  key={info.title}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="bg-background border border-border rounded-lg p-6"
-                >
-                  <div className="flex items-center gap-3 mb-4">
-                    <info.icon className="w-6 h-6 text-primary" />
-                    <h3 className="font-serif text-xl font-bold text-foreground">{info.title}</h3>
+              {essentialInfo.map((info) => {
+                const Icon = info.icon
+                return (
+                  <div key={info.title} className="border border-border rounded-lg p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                      <Icon className="w-6 h-6" />
+                      <h3 className="text-xl font-medium">{info.title}</h3>
+                    </div>
+                    <ul className="space-y-2">
+                      {info.items.map((item, i) => (
+                        <li key={i} className="text-gray-600 leading-relaxed flex items-start gap-2">
+                          <span className="mt-1">•</span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <ul className="space-y-2">
-                    {info.items.map((item, i) => (
-                      <li key={i} className="text-muted-foreground leading-relaxed flex items-start gap-2">
-                        <span className="text-primary mt-1">•</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </motion.div>
-              ))}
+                )
+              })}
             </div>
           </div>
-        </section>
 
-        {/* Language Guide */}
-        <section className="py-16 px-4 bg-background">
-          <div className="max-w-7xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-12"
-            >
-              <h2 className="font-serif text-4xl md:text-5xl font-bold text-foreground mb-4">Basic Khmer Phrases</h2>
-              <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
-                Learn a few words to connect with locals
-              </p>
-            </motion.div>
-
-            <div className="max-w-4xl mx-auto">
-              <div className="bg-card border border-border rounded-lg overflow-hidden">
-                <div className="grid grid-cols-3 bg-muted p-4 font-medium text-foreground">
-                  <div>Khmer</div>
-                  <div>Pronunciation</div>
-                  <div>English</div>
-                </div>
-                {languagePhrases.map((phrase, index) => (
-                  <motion.div
-                    key={phrase.english}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                    className="grid grid-cols-3 p-4 border-t border-border hover:bg-muted/50 transition-colors"
-                  >
-                    <div className="text-foreground font-serif text-lg">{phrase.khmer}</div>
-                    <div className="text-muted-foreground italic">{phrase.phonetic}</div>
-                    <div className="text-foreground">{phrase.english}</div>
-                  </motion.div>
-                ))}
+          {/* Language Guide */}
+          <div className="mb-12">
+            <div className="flex items-center gap-2 mb-6 pb-2 border-b">
+              <h2 className="text-2xl font-light">Basic Khmer Phrases</h2>
+            </div>
+            <div className="border border-border rounded-lg overflow-hidden">
+              <div className="grid grid-cols-3 bg-gray-50 p-4 font-medium">
+                <div>Khmer</div>
+                <div>Pronunciation</div>
+                <div>English</div>
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Safety Tips */}
-        <section className="py-16 px-4 bg-card">
-          <div className="max-w-7xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-12"
-            >
-              <h2 className="font-serif text-4xl md:text-5xl font-bold text-foreground mb-4">Safety Tips</h2>
-              <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
-                Stay safe during your travels
-              </p>
-            </motion.div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-              {[
-                {
-                  title: "Health",
-                  tip: "Drink bottled water, use mosquito repellent, and consider travel insurance. Vaccinations recommended.",
-                },
-                {
-                  title: "Scams",
-                  tip: "Agree on prices before services, be wary of overly friendly strangers, and keep valuables secure.",
-                },
-                {
-                  title: "Traffic",
-                  tip: "Roads can be chaotic. Always wear a helmet on motorbikes and be extra cautious when crossing streets.",
-                },
-                {
-                  title: "Sun Protection",
-                  tip: "Cambodia is hot and sunny. Use high SPF sunscreen, wear a hat, and stay hydrated throughout the day.",
-                },
-                {
-                  title: "Landmines",
-                  tip: "Stick to marked paths in rural areas. Some regions still have unexploded ordnance from past conflicts.",
-                },
-                {
-                  title: "Valuables",
-                  tip: "Use hotel safes, avoid displaying expensive items, and keep copies of important documents separately.",
-                },
-              ].map((item, index) => (
-                <motion.div
-                  key={item.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="bg-background border border-border rounded-lg p-6"
+              {languagePhrases.map((phrase) => (
+                <div
+                  key={phrase.english}
+                  className="grid grid-cols-3 p-4 border-t border-border hover:bg-gray-50 transition-colors"
                 >
-                  <div className="flex items-center gap-2 mb-3">
-                    <AlertCircle className="w-5 h-5 text-primary" />
-                    <h3 className="font-serif text-lg font-bold text-foreground">{item.title}</h3>
-                  </div>
-                  <p className="text-muted-foreground leading-relaxed">{item.tip}</p>
-                </motion.div>
+                  <div className="text-lg">{phrase.khmer}</div>
+                  <div className="text-gray-600 italic">{phrase.phonetic}</div>
+                  <div>{phrase.english}</div>
+                </div>
               ))}
             </div>
           </div>
-        </section>
+
+          {/* Safety Tips */}
+          <div className="mb-12">
+            <div className="flex items-center gap-2 mb-6 pb-2 border-b">
+              <AlertCircle className="w-5 h-5" />
+              <h2 className="text-2xl font-light">Safety Tips</h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {safetyTips.map((item) => (
+                <div key={item.title} className="border border-border rounded-lg p-6">
+                  <h3 className="text-lg font-medium mb-3">{item.title}</h3>
+                  <p className="text-gray-600 leading-relaxed">{item.tip}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </main>
     </>
   )

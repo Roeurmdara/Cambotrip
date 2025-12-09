@@ -1,84 +1,128 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Calendar } from "lucide-react"
 
 const festivals = [
   {
     month: "January",
     name: "Chinese New Year",
-    description: "Celebrated by the Chinese-Cambodian community with dragon dances, fireworks, and family gatherings.",
-    color: "from-red-500/20 to-orange-500/20",
+    description:
+      "Celebrated by the Chinese-Cambodian community with vibrant dragon dances, fireworks, and family gatherings.",
+    duration: "3 days",
+    startDay: 21,
+    endDay: 23,
+    location: "Nationwide, especially Phnom Penh",
+    image: "https://i.pinimg.com/736x/be/ce/b5/beceb50067ee77bf4151517ad6ba9ae7.jpg",
   },
   {
     month: "April",
     name: "Khmer New Year",
     description:
-      "The most important holiday in Cambodia, celebrated with temple visits, traditional games, and water blessings.",
-    color: "from-primary/20 to-yellow-500/20",
+      "The most important holiday in Cambodia, marking the end of harvest season and the beginning of the new year.",
+    duration: "3-4 days",
+    startDay: 13,
+    endDay: 16,
+    location: "Nationwide",
+    image: "https://i.pinimg.com/1200x/b4/97/f5/b497f5d28b4b24eb8f9472a7c0d8a7c5.jpg",
   },
   {
     month: "May",
     name: "Royal Ploughing Ceremony",
     description:
-      "An ancient ritual to mark the beginning of the rice-growing season, presided over by the royal family.",
-    color: "from-green-500/20 to-emerald-500/20",
+      "An ancient Brahman ritual to mark the beginning of the rice-growing season, presided over by the royal family.",
+    duration: "1 day",
+    startDay: 10,
+    endDay: 10,
+    location: "Royal Palace, Phnom Penh",
+    image: "https://i.pinimg.com/1200x/30/07/79/3007798f3fa3f55d7b249835eca916d4.jpg",
   },
   {
-    month: "September",
+    month: "May",
+    name: "Visak Bochea",
+    description:
+      "The holiest day in Buddhism, celebrating the birth, enlightenment, and death of Buddha.",
+    duration: "1 day",
+    startDay: 24,
+    endDay: 24,
+    location: "All temples nationwide",
+    image: "https://i.pinimg.com/1200x/e0/c0/e1/e0c0e117f93e694ee3afdb4283f32d05.jpg",
+  },
+  {
+    month: "September-October",
     name: "Pchum Ben",
     description:
       "A 15-day religious festival honoring deceased ancestors, with offerings made at pagodas across the country.",
-    color: "from-purple-500/20 to-indigo-500/20",
+    duration: "15 days",
+    startDay: 25,
+    endDay: 9,
+    location: "All pagodas nationwide",
+    image: "https://i.pinimg.com/1200x/97/10/d8/9710d8ac76f2664dce25b9360306617a.jpg",
   },
   {
     month: "November",
-    name: "Water Festival",
+    name: "Water Festival (Bon Om Touk)",
     description:
-      "Celebrates the reversal of the Tonle Sap River with boat races, fireworks, and illuminated floats in Phnom Penh.",
-    color: "from-blue-500/20 to-cyan-500/20",
+      "Celebrates the reversal of the Tonle Sap River with spectacular boat races, fireworks, and illuminated floats.",
+    duration: "3 days",
+    startDay: 5,
+    endDay: 7,
+    location: "Phnom Penh riverfront",
+    image: "https://i.pinimg.com/736x/5c/57/33/5c5733eeea8087f222ef262925eb161a.jpg",
   },
   {
     month: "November",
     name: "Independence Day",
     description: "Commemorates Cambodia's independence from France in 1953 with parades and celebrations.",
-    color: "from-red-500/20 to-blue-500/20",
+    duration: "1 day",
+    startDay: 9,
+    endDay: 9,
+    location: "Independence Monument, Phnom Penh",
+    image: "https://i.pinimg.com/1200x/a7/da/c1/a7dac1281c34bfd476cd7963db6eb1e5.jpg",
   },
+
 ]
 
 export default function FestivalTimeline() {
   return (
-    <div className="relative">
-      {/* Timeline Line */}
-      <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-border" />
-
-      <div className="space-y-12">
-        {festivals.map((festival, index) => (
-          <motion.div
-            key={festival.name}
-            initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: index * 0.1 }}
-            className={`relative flex items-center ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"}`}
-          >
-            {/* Timeline Dot */}
-            <div className="absolute left-8 md:left-1/2 w-4 h-4 -ml-2 bg-primary rounded-full border-4 border-background z-10" />
-
-            {/* Content Card */}
-            <div className={`ml-20 md:ml-0 md:w-1/2 ${index % 2 === 0 ? "md:pr-12" : "md:pl-12"}`}>
-              <div className={`bg-gradient-to-br ${festival.color} border border-border rounded-lg p-6`}>
-                <div className="flex items-center gap-2 text-primary mb-2">
-                  <Calendar className="w-4 h-4" />
-                  <span className="text-sm font-medium">{festival.month}</span>
-                </div>
-                <h3 className="font-serif text-2xl font-bold text-foreground mb-3">{festival.name}</h3>
-                <p className="text-muted-foreground leading-relaxed">{festival.description}</p>
-              </div>
+    <div className="grid md:grid-cols-2 gap-6">
+      {festivals.map((festival, index) => (
+        <motion.div
+          key={festival.name}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: index * 0.05 }}
+          className="group block"
+        >
+          <div className="relative h-70 overflow-hidden mb-4">
+            <img
+              src={festival.image}
+              alt={festival.name}
+              className="w-full h-full object-cover group-hover:opacity-90 transition-opacity duration-300"
+            />
+          </div>
+          
+          <div className="space-y-2">
+            <div className="text-xs uppercase tracking-wider text-muted-foreground">
+              {festival.month}.{festival.startDay}-{festival.endDay}
             </div>
-          </motion.div>
-        ))}
-      </div>
+            
+            <h2 className="font-serif text-xl font-medium group-hover:text-muted-foreground transition-colors">
+              {festival.name}
+            </h2>
+            
+            <p className="text-sm text-muted-foreground line-clamp-2">
+              {festival.description}
+            </p>
+            
+            <div className="flex items-center gap-3 text-xs text-muted-foreground pt-2">
+              <span>{festival.duration}</span>
+              <span>·</span>
+              <span>{festival.location}</span>
+            </div>
+          </div>
+        </motion.div>
+      ))}
     </div>
   )
 }
