@@ -61,47 +61,50 @@ export default function DestinationDetail({ destination }: { destination: Destin
   }
 
   return (
-    <main className="min-h-screen pt-16">
+    <main className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative h-[70vh] flex items-end overflow-hidden">
+      <section className="relative h-[75vh] flex items-end overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent z-10" />
           <motion.img
-            initial={{ scale: 1.1 }}
+            initial={{ scale: 1.05 }}
             animate={{ scale: 1 }}
-            transition={{ duration: 1.5 }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
             src={destination.heroImage || destination.image}
             alt={destination.name}
             className="w-full h-full object-cover"
           />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
         </div>
 
-        <div className="relative z-20 w-full px-4 pb-12">
-          <div className="max-w-7xl mx-auto">
+        <div className="relative z-20 w-full px-6 pb-16">
+          <div className="max-w-6xl mx-auto">
             <Link href="/destinations">
-              <Button variant="ghost" className="mb-4 text-white hover:text-primary">
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Back to Destinations
-              </Button>
+              <button className="mb-8 text-white/90 hover:text-white text-sm font-light tracking-wide transition-colors flex items-center gap-2">
+                <ArrowLeft className="w-4 h-4" />
+                Back
+              </button>
             </Link>
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.8 }}
+              transition={{ delay: 0.2, duration: 0.8 }}
             >
-              <div className="flex items-center gap-2 text-primary text-sm font-medium mb-3">
-                <MapPin className="w-4 h-4" />
+              <div className="flex items-center gap-2 text-white/70 text-xs uppercase tracking-widest mb-4">
+                <MapPin className="w-3 h-3" />
                 {destination.location}
               </div>
-              <h1 className="font-serif text-5xl md:text-7xl font-bold text-white mb-4">{destination.name}</h1>
-              <div className="flex items-center gap-6 text-white">
+              <h1 className="text-6xl md:text-7xl font-extralight text-white mb-6 tracking-tight">
+                {destination.name}
+              </h1>
+              <div className="flex items-center gap-8 text-white/80 text-sm">
                 <div className="flex items-center gap-2">
-                  <Star className="w-5 h-5 text-primary fill-primary" />
-                  <span className="font-medium">{destination.rating} / 5</span>
+                  <Star className="w-4 h-4" />
+                  <span className="font-light">{destination.rating}</span>
                 </div>
+                <span className="text-white/40">·</span>
                 <div className="flex items-center gap-2">
-                  <Clock className="w-5 h-5" />
-                  <span>Best: {destination.bestTime}</span>
+                  <Clock className="w-4 h-4" />
+                  <span className="font-light">{destination.bestTime}</span>
                 </div>
               </div>
             </motion.div>
@@ -110,33 +113,35 @@ export default function DestinationDetail({ destination }: { destination: Destin
       </section>
 
       {/* Content Section */}
-      <section className="py-16 px-4 bg-background">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+      <section className="py-24 px-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
             {/* Main Content */}
             <div className="lg:col-span-2">
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
+                transition={{ duration: 0.5 }}
               >
-                <h2 className="font-serif text-3xl font-bold text-foreground mb-4">About</h2>
-                <p className="text-muted-foreground text-lg leading-relaxed mb-8">{destination.description}</p>
+                <h2 className="text-xs uppercase tracking-widest text-gray-400 mb-6">About</h2>
+                <p className="text-gray-700 text-lg font-light leading-loose mb-20">
+                  {destination.description}
+                </p>
               </motion.div>
 
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.1 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
               >
-                <h2 className="font-serif text-3xl font-bold text-foreground mb-6">Highlights</h2>
-                <div className="space-y-4 mb-8">
+                <h2 className="text-xs uppercase tracking-widest text-gray-400 mb-6">Highlights</h2>
+                <div className="space-y-3 mb-20">
                   {destination.highlights.map((highlight, index) => (
                     <div key={index} className="flex items-start gap-3">
-                      <CheckCircle className="w-6 h-6 text-primary flex-shrink-0 mt-0.5" />
-                      <p className="text-muted-foreground leading-relaxed">{highlight}</p>
+                      <CheckCircle className="w-4 h-4 text-gray-400 flex-shrink-0 mt-1" />
+                      <p className="text-gray-600 font-light leading-relaxed">{highlight}</p>
                     </div>
                   ))}
                 </div>
@@ -144,27 +149,24 @@ export default function DestinationDetail({ destination }: { destination: Destin
 
               {destination.placesToVisit && destination.placesToVisit.length > 0 && (
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 15 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                  className="mb-12"
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  className="mb-20"
                 >
-                  <h2 className="font-serif text-3xl font-bold text-foreground mb-6 flex items-center gap-2">
-                    <MapPinned className="w-7 h-7 text-primary" />
+                  <h2 className="text-xs uppercase tracking-widest text-gray-400 mb-8 flex items-center gap-2">
+                    <MapPinned className="w-4 h-4" />
                     Places to Visit
                   </h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-10">
                     {destination.placesToVisit.map((place, index) => (
-                      <div
-                        key={index}
-                        className="bg-card border border-border rounded-lg p-5 hover:border-primary transition-colors"
-                      >
-                        <div className="flex items-start justify-between mb-2">
-                          <h3 className="font-semibold text-foreground">{place.name}</h3>
-                          <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded">{place.type}</span>
+                      <div key={index} className="border-b border-gray-100 pb-8">
+                        <div className="flex items-start justify-between mb-3">
+                          <h3 className="text-xl font-light">{place.name}</h3>
+                          <span className="text-xs text-gray-400 uppercase tracking-wider">{place.type}</span>
                         </div>
-                        <p className="text-sm text-muted-foreground leading-relaxed">{place.description}</p>
+                        <p className="text-gray-600 font-light leading-relaxed">{place.description}</p>
                       </div>
                     ))}
                   </div>
@@ -173,29 +175,29 @@ export default function DestinationDetail({ destination }: { destination: Destin
 
               {destination.accommodations && destination.accommodations.length > 0 && (
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 15 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
-                  className="mb-12"
+                  transition={{ duration: 0.5, delay: 0.3 }}
+                  className="mb-20"
                 >
-                  <h2 className="font-serif text-3xl font-bold text-foreground mb-6 flex items-center gap-2">
-                    <Hotel className="w-7 h-7 text-primary" />
+                  <h2 className="text-xs uppercase tracking-widest text-gray-400 mb-8 flex items-center gap-2">
+                    <Hotel className="w-4 h-4" />
                     Where to Stay
                   </h2>
-                  <div className="space-y-4">
+                  <div className="space-y-10">
                     {destination.accommodations.map((accommodation, index) => (
-                      <div key={index} className="bg-card border border-border rounded-lg p-5">
-                        <div className="flex items-start justify-between mb-2">
+                      <div key={index} className="border-b border-gray-100 pb-8">
+                        <div className="flex items-start justify-between mb-3">
                           <div>
-                            <h3 className="font-semibold text-foreground mb-1">{accommodation.name}</h3>
-                            <p className="text-sm text-primary font-medium">{accommodation.price}</p>
+                            <h3 className="text-xl font-light mb-1">{accommodation.name}</h3>
+                            <p className="text-sm text-gray-500">{accommodation.price}</p>
                           </div>
-                          <span className="text-xs bg-primary/10 text-primary px-3 py-1 rounded">
+                          <span className="text-xs text-gray-400 uppercase tracking-wider">
                             {accommodation.type}
                           </span>
                         </div>
-                        <p className="text-sm text-muted-foreground leading-relaxed">{accommodation.description}</p>
+                        <p className="text-gray-600 font-light leading-relaxed">{accommodation.description}</p>
                       </div>
                     ))}
                   </div>
@@ -204,28 +206,24 @@ export default function DestinationDetail({ destination }: { destination: Destin
 
               {destination.restaurants && destination.restaurants.length > 0 && (
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 15 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.4 }}
-                  className="mb-12"
+                  transition={{ duration: 0.5, delay: 0.4 }}
+                  className="mb-20"
                 >
-                  <h2 className="font-serif text-3xl font-bold text-foreground mb-6 flex items-center gap-2">
-                    <UtensilsCrossed className="w-7 h-7 text-primary" />
+                  <h2 className="text-xs uppercase tracking-widest text-gray-400 mb-8 flex items-center gap-2">
+                    <UtensilsCrossed className="w-4 h-4" />
                     Where to Eat
                   </h2>
-                  <div className="space-y-4">
+                  <div className="space-y-10">
                     {destination.restaurants.map((restaurant, index) => (
-                      <div key={index} className="bg-card border border-border rounded-lg p-5">
-                        <div className="flex items-start justify-between mb-2">
-                          <div>
-                            <h3 className="font-semibold text-foreground mb-1">{restaurant.name}</h3>
-                            <p className="text-sm text-muted-foreground">
-                              {restaurant.cuisine} • {restaurant.price}
-                            </p>
-                          </div>
-                        </div>
-                        <p className="text-sm text-muted-foreground leading-relaxed">{restaurant.specialty}</p>
+                      <div key={index} className="border-b border-gray-100 pb-8">
+                        <h3 className="text-xl font-light mb-2">{restaurant.name}</h3>
+                        <p className="text-sm text-gray-400 mb-3">
+                          {restaurant.cuisine} · {restaurant.price}
+                        </p>
+                        <p className="text-gray-600 font-light leading-relaxed">{restaurant.specialty}</p>
                       </div>
                     ))}
                   </div>
@@ -234,51 +232,49 @@ export default function DestinationDetail({ destination }: { destination: Destin
 
               {destination.transportation && (
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 15 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.5 }}
-                  className="mb-12"
+                  transition={{ duration: 0.5, delay: 0.5 }}
+                  className="mb-20"
                 >
-                  <h2 className="font-serif text-3xl font-bold text-foreground mb-6 flex items-center gap-2">
-                    <Navigation2 className="w-7 h-7 text-primary" />
+                  <h2 className="text-xs uppercase tracking-widest text-gray-400 mb-8 flex items-center gap-2">
+                    <Navigation2 className="w-4 h-4" />
                     Getting Around
                   </h2>
-                  <div className="space-y-4">
-                    <div className="bg-card border border-border rounded-lg p-5">
-                      <h3 className="font-semibold text-foreground mb-2">Getting There</h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed">
+                  <div className="space-y-8">
+                    <div className="border-b border-gray-100 pb-6">
+                      <h3 className="text-sm text-gray-500 mb-3">Getting There</h3>
+                      <p className="text-gray-600 font-light leading-relaxed">
                         {destination.transportation.gettingThere}
                       </p>
                     </div>
-                    <div className="bg-card border border-border rounded-lg p-5">
-                      <h3 className="font-semibold text-foreground mb-2">Getting Around</h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed">
+                    <div className="border-b border-gray-100 pb-6">
+                      <h3 className="text-sm text-gray-500 mb-3">Getting Around</h3>
+                      <p className="text-gray-600 font-light leading-relaxed">
                         {destination.transportation.gettingAround}
                       </p>
                     </div>
-                    <div className="bg-card border border-border rounded-lg p-5">
-                      <h3 className="font-semibold text-foreground mb-2">Typical Costs</h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed">
-                        {destination.transportation.costs}
-                      </p>
+                    <div className="border-b border-gray-100 pb-6">
+                      <h3 className="text-sm text-gray-500 mb-3">Typical Costs</h3>
+                      <p className="text-gray-600 font-light leading-relaxed">{destination.transportation.costs}</p>
                     </div>
                   </div>
                 </motion.div>
               )}
 
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.6 }}
+                transition={{ duration: 0.5, delay: 0.6 }}
               >
-                <h2 className="font-serif text-3xl font-bold text-foreground mb-6">Travel Tips</h2>
-                <div className="space-y-4">
+                <h2 className="text-xs uppercase tracking-widest text-gray-400 mb-6">Travel Tips</h2>
+                <div className="space-y-3">
                   {destination.tips.map((tip, index) => (
-                    <div key={index} className="flex items-start gap-3 bg-card border border-border rounded-lg p-4">
-                      <Lightbulb className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                      <p className="text-muted-foreground leading-relaxed">{tip}</p>
+                    <div key={index} className="flex items-start gap-3">
+                      <Lightbulb className="w-4 h-4 text-gray-400 flex-shrink-0 mt-1" />
+                      <p className="text-gray-600 font-light leading-relaxed">{tip}</p>
                     </div>
                   ))}
                 </div>
@@ -288,33 +284,33 @@ export default function DestinationDetail({ destination }: { destination: Destin
             {/* Sidebar */}
             <div className="lg:col-span-1">
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
+                transition={{ duration: 0.5 }}
                 className="sticky top-24"
               >
-                <div className="bg-card border border-border rounded-lg p-6 mb-6">
-                  <h3 className="font-serif text-xl font-bold text-foreground mb-4">Quick Info</h3>
-                  <div className="space-y-4">
+                <div className="border border-gray-200 p-8 mb-6">
+                  <h3 className="text-xs uppercase tracking-widest text-gray-400 mb-6">Quick Info</h3>
+                  <div className="space-y-6">
                     <div>
-                      <p className="text-sm text-muted-foreground mb-1">Location</p>
-                      <p className="text-foreground font-medium">{destination.location}</p>
+                      <p className="text-xs text-gray-400 mb-2 uppercase tracking-wider">Location</p>
+                      <p className="text-gray-700 font-light">{destination.location}</p>
                     </div>
                     <div>
-                      <p className="text-sm text-muted-foreground mb-1">Best Time to Visit</p>
-                      <p className="text-foreground font-medium">{destination.bestTime}</p>
+                      <p className="text-xs text-gray-400 mb-2 uppercase tracking-wider">Best Time</p>
+                      <p className="text-gray-700 font-light">{destination.bestTime}</p>
                     </div>
                     <div>
-                      <p className="text-sm text-muted-foreground mb-1">Rating</p>
+                      <p className="text-xs text-gray-400 mb-2 uppercase tracking-wider">Rating</p>
                       <div className="flex items-center gap-2">
-                        <Star className="w-5 h-5 text-primary fill-primary" />
-                        <span className="text-foreground font-medium">{destination.rating} / 5</span>
+                        <Star className="w-4 h-4 text-gray-400" />
+                        <span className="text-gray-700 font-light">{destination.rating} / 5</span>
                       </div>
                     </div>
                     <div>
-                      <p className="text-sm text-muted-foreground mb-1">Coordinates</p>
-                      <p className="text-foreground font-medium font-mono text-sm">
+                      <p className="text-xs text-gray-400 mb-2 uppercase tracking-wider">Coordinates</p>
+                      <p className="text-gray-700 font-light text-sm font-mono">
                         {destination.coordinates.lat}, {destination.coordinates.lng}
                       </p>
                     </div>
@@ -322,19 +318,14 @@ export default function DestinationDetail({ destination }: { destination: Destin
                 </div>
 
                 <div className="space-y-3">
-                  <Link href="/map">
-                    <Button className="w-full bg-card text-foreground border border-border hover:bg-card/80">
-                      <MapPin className="w-4 h-4 mr-2" />
-                      View on Site Map
-                    </Button>
-                  </Link>
-                  <Button
+                
+                  <button
                     onClick={openGoogleMaps}
-                    className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
+                    className="w-full py-3 bg-black text-white text-sm font-light tracking-wide hover:bg-gray-900 transition-colors flex items-center justify-center gap-2"
                   >
-                    <Navigation2 className="w-4 h-4 mr-2" />
+                    <Navigation2 className="w-4 h-4" />
                     Get Directions
-                  </Button>
+                  </button>
                 </div>
               </motion.div>
             </div>
@@ -344,31 +335,31 @@ export default function DestinationDetail({ destination }: { destination: Destin
 
       {/* Gallery Section */}
       {destination.gallery.length > 0 && (
-        <section className="py-16 px-4 bg-card">
-          <div className="max-w-7xl mx-auto">
+        <section className="py-24 px-6 border-t border-gray-200">
+          <div className="max-w-6xl mx-auto">
             <motion.h2
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="font-serif text-3xl font-bold text-foreground mb-8"
+              transition={{ duration: 0.5 }}
+              className="text-xs uppercase tracking-widest text-gray-400 mb-12 text-center"
             >
               Gallery
             </motion.h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
               {destination.gallery.map((image, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="aspect-[4/3] overflow-hidden rounded-lg"
+                  transition={{ duration: 0.5, delay: index * 0.05 }}
+                  className="aspect-[4/3] overflow-hidden"
                 >
                   <img
                     src={image || "/placeholder.svg"}
-                    alt={`${destination.name} gallery ${index + 1}`}
-                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-700"
+                    alt={`${destination.name} ${index + 1}`}
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
                   />
                 </motion.div>
               ))}
